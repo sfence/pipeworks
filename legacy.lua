@@ -27,13 +27,13 @@ if not minetest.get_modpath("auto_tree_tap") and
 		is_ground_content = true,
 		paramtype2 = "facedir",
 		groups = {snappy=2,choppy=2,oddly_breakable_by_hand=2, mesecon = 2,tubedevice=1, not_in_creative_inventory=1 },
-		sounds = default.node_sound_stone_defaults(),
+		sounds = hades_sounds.node_sound_stone_defaults(),
 		tube = {connect_sides={back=1}},
 		on_construct = function(pos)
 			local meta = minetest.get_meta(pos)
 			local inv = meta:get_inventory()
 			inv:set_size("pick", 1)
-			inv:set_stack("pick", 1, ItemStack("default:pick_mese"))
+			inv:set_stack("pick", 1, ItemStack("hades_core:pick_mese"))
 		end,
 		after_place_node = function (pos, placer)
 			pipeworks.scan_for_tube_objects(pos, placer)

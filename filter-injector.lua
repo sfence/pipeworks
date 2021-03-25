@@ -377,7 +377,7 @@ for _, data in ipairs({
 		paramtype2 = "facedir",
 		groups = {snappy = 2, choppy = 2, oddly_breakable_by_hand = 2, mesecon = 2},
 		legacy_facedir_simple = true,
-		sounds = default.node_sound_wood_defaults(),
+		sounds = hades_sounds.node_sound_wood_defaults(),
 		on_construct = function(pos)
 			local meta = minetest.get_meta(pos)
 			set_filter_formspec(data, meta)
@@ -480,18 +480,18 @@ end
 minetest.register_craft( {
 	output = "pipeworks:filter 2",
 	recipe = {
-	        { "default:steel_ingot", "default:steel_ingot", "basic_materials:plastic_sheet" },
-	        { "group:stick", "default:mese_crystal", "basic_materials:plastic_sheet" },
-	        { "default:steel_ingot", "default:steel_ingot", "basic_materials:plastic_sheet" }
+	        { "hades_core:steel_ingot", "hades_core:steel_ingot", "hades_materials:plastic_sheeting" },
+	        { "group:stick", "hades_core:sapphire", "hades_materials:plastic_sheeting" },
+	        { "hades_core:steel_ingot", "hades_core:steel_ingot", "hades_materials:plastic_sheeting" }
 	},
 })
 
 minetest.register_craft( {
 	output = "pipeworks:mese_filter 2",
 	recipe = {
-	        { "default:steel_ingot", "default:steel_ingot", "basic_materials:plastic_sheet" },
-	        { "group:stick", "default:mese", "basic_materials:plastic_sheet" },
-	        { "default:steel_ingot", "default:steel_ingot", "basic_materials:plastic_sheet" }
+	        { "hades_core:steel_ingot", "hades_core:steel_ingot", "hades_materials:plastic_sheeting" },
+	        { "group:stick", "hades_core:mese", "hades_materials:plastic_sheeting" },
+	        { "hades_core:steel_ingot", "hades_core:steel_ingot", "hades_materials:plastic_sheeting" }
 	},
 })
 
@@ -499,9 +499,9 @@ if minetest.get_modpath("digilines") then
 	minetest.register_craft( {
 		output = "pipeworks:digiline_filter 2",
 		recipe = {
-			{ "default:steel_ingot", "default:steel_ingot", "basic_materials:plastic_sheet" },
-			{ "group:stick", "digilines:wire_std_00000000", "basic_materials:plastic_sheet" },
-			{ "default:steel_ingot", "default:steel_ingot", "basic_materials:plastic_sheet" }
+			{ "hades_core:steel_ingot", "hades_core:steel_ingot", "hades_materials:plastic_sheeting" },
+			{ "group:stick", "digilines:wire_std_00000000", "hades_materials:plastic_sheeting" },
+			{ "hades_core:steel_ingot", "hades_core:steel_ingot", "hades_materials:plastic_sheeting" }
 		},
 	})
 end

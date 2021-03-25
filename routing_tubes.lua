@@ -4,9 +4,9 @@ pipeworks.register_tube("pipeworks:tube", S("Pneumatic tube segment"))
 minetest.register_craft( {
 	output = "pipeworks:tube_1 6",
 	recipe = {
-	        { "basic_materials:plastic_sheet", "basic_materials:plastic_sheet", "basic_materials:plastic_sheet" },
+	        { "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting" },
 	        { "", "", "" },
-	        { "basic_materials:plastic_sheet", "basic_materials:plastic_sheet", "basic_materials:plastic_sheet" }
+	        { "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting" }
 	},
 })
 
@@ -82,9 +82,9 @@ if pipeworks.enable_priority_tube then
 	minetest.register_craft( {
 		output = "pipeworks:priority_tube_1 6",
 		recipe = {
-			{ "basic_materials:plastic_sheet", "basic_materials:plastic_sheet", "basic_materials:plastic_sheet" },
-			{ "default:gold_ingot", "", "default:gold_ingot" },
-			{ "basic_materials:plastic_sheet", "basic_materials:plastic_sheet", "basic_materials:plastic_sheet" }
+			{ "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting" },
+			{ "hades_core:gold_ingot", "", "hades_core:gold_ingot" },
+			{ "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting" }
 		},
 	})
 end
@@ -107,9 +107,9 @@ if pipeworks.enable_accelerator_tube then
 	minetest.register_craft( {
 		output = "pipeworks:accelerator_tube_1 2",
 		recipe = {
-			{ "basic_materials:plastic_sheet", "basic_materials:plastic_sheet", "basic_materials:plastic_sheet" },
-			{ "default:mese_crystal_fragment", "default:steel_ingot", "default:mese_crystal_fragment" },
-			{ "basic_materials:plastic_sheet", "basic_materials:plastic_sheet", "basic_materials:plastic_sheet" }
+			{ "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting" },
+			{ "hades_core:mese_crystal_fragment", "hades_core:steel_ingot", "hades_core:mese_crystal_fragment" },
+			{ "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting" }
 		},
 	})
 end
@@ -147,7 +147,7 @@ if pipeworks.enable_one_way_tube then
 		node_box = {type = "fixed",
 			fixed = {{-1/2, -9/64, -9/64, 1/2, 9/64, 9/64}}},
 		groups = {snappy = 2, choppy = 2, oddly_breakable_by_hand = 2, tubedevice = 1},
-		sounds = default.node_sound_wood_defaults(),
+		sounds = hades_sounds.node_sound_wood_defaults(),
 		tube = {
 			connect_sides = {left = 1, right = 1},
 			can_go = function(pos, node, velocity, stack)
@@ -168,9 +168,9 @@ if pipeworks.enable_one_way_tube then
 	minetest.register_craft({
 		output = "pipeworks:one_way_tube 2",
 		recipe = {
-			{ "basic_materials:plastic_sheet", "basic_materials:plastic_sheet", "basic_materials:plastic_sheet" },
-			{ "group:stick", "default:mese_crystal", "basic_materials:plastic_sheet" },
-			{ "basic_materials:plastic_sheet", "basic_materials:plastic_sheet", "basic_materials:plastic_sheet" }
+			{ "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting" },
+			{ "group:stick", "hades_core:mese_crystal", "hades_materials:plastic_sheeting" },
+			{ "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting" }
 		},
 	})
 end

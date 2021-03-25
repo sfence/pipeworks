@@ -2,6 +2,9 @@ Changelog
 ---------
 
 
+2020-12-21 (sfence)
+modification for support minetest game Hades Revisited.
+
 
 2017-10-19 (thetaepsilon)
 Directional flowables are now implemented.

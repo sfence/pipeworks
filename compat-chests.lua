@@ -11,19 +11,25 @@ local tube_entry = "^pipeworks_tube_connection_wooden.png"
 -- Chest Locals
 local open_chests = {}
 
+local function get_hotbar_bg(x,y)
+ local out = ""
+ for i=0,7,1 do
+  out = out .."image["..x+i..","..y..";1,1;gui_hb_bg.png]"
+ end
+ return out
+end
+
 local function get_chest_formspec(pos)
 	local spos = pos.x .. "," .. pos.y .. "," .. pos.z
 	local formspec =
 		"size[8,9]" ..
-		default.gui_bg ..
-		default.gui_bg_img ..
-		default.gui_slots ..
+	  "background9[8,8;8,9;hades_chests_chestui.png;true;8]"..
 		"list[nodemeta:" .. spos .. ";main;0,0.3;8,4;]" ..
 		"list[current_player;main;0,4.85;8,1;]" ..
 		"list[current_player;main;0,6.08;8,3;8]" ..
 		"listring[nodemeta:" .. spos .. ";main]" ..
 		"listring[current_player;main]" ..
-		default.get_hotbar_bg(0,4.85)
+		get_hotbar_bg(0,4.85)
 
 	-- Pipeworks Switch
 	formspec = formspec ..
@@ -71,7 +77,8 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 					end
 				end
 				minetest.after(0.2, function()
-					minetest.swap_node(pos, { name = "default:" .. swap, param2 = node.param2 })
+          -- No open chest in Hades Revisited
+					--minetest.swap_node(pos, { name = "hades_chests:" .. swap, param2 = node.param2 })
 
 					-- Pipeworks notification
 					pipeworks.after_place(pos)
@@ -88,10 +95,12 @@ minetest.register_on_player_receive_fields(function(player, formname, fields)
 end)
 
 -- Original Definitions
-local old_chest_def = table.copy(minetest.registered_items["default:chest"])
-local old_chest_open_def = table.copy(minetest.registered_items["default:chest_open"])
-local old_chest_locked_def = table.copy(minetest.registered_items["default:chest_locked"])
-local old_chest_locked_open_def = table.copy(minetest.registered_items["default:chest_locked_open"])
+local old_chest_def = table.copy(minetest.registered_items["hades_chests:chest"])
+--local old_chest_open_def = table.copy(minetest.registered_items["hades_chests:chest_open"])
+local old_chest_open_def = table.copy(minetest.registered_items["hades_chests:chest"])
+local old_chest_locked_def = table.copy(minetest.registered_items["hades_chests:chest_locked"])
+--local old_chest_locked_open_def = table.copy(minetest.registered_items["hades_chests:chest_locked_open"])
+local old_chest_locked_open_def = table.copy(minetest.registered_items["hades_chests:chest_locked"])
 
 -- Override Construction
 local override_protected, override, override_open, override_protected_open
@@ -116,9 +125,10 @@ override_protected = {
 		minetest.sound_play(old_chest_locked_def.sound_open, {gain = 0.3,
 				pos = pos, max_hear_distance = 10})
 		if not chest_lid_obstructed(pos) then
-			minetest.swap_node(pos,
-					{ name = "default:" .. "chest_locked" .. "_open",
-					param2 = node.param2 })
+      -- No open chest in Hades Revisited
+			--minetest.swap_node(pos,
+			--		{ name = "hades_chests:" .. "chest_locked" .. "_open",
+			--		param2 = node.param2 })
 		end
 		minetest.after(0.2, minetest.show_formspec,
 				clicker:get_player_name(),
@@ -160,9 +170,10 @@ override = {
 		minetest.sound_play(old_chest_def.sound_open, {gain = 0.3, pos = pos,
 				max_hear_distance = 10})
 		if not chest_lid_obstructed(pos) then
-			minetest.swap_node(pos, {
-					name = "default:" .. "chest" .. "_open",
-					param2 = node.param2 })
+      -- No open chest in Hades Revisited
+			--minetest.swap_node(pos, {
+			--		name = "hades_chests:" .. "chest" .. "_open",
+			--		param2 = node.param2 })
 		end
 		minetest.after(0.2, minetest.show_formspec,
 				clicker:get_player_name(),
@@ -236,8 +247,8 @@ for i,v in ipairs({override_protected, override, override_open, override_protect
 end
 
 -- Override with the new modifications.
-minetest.override_item("default:chest", override)
-minetest.override_item("default:chest_open", override_open)
-minetest.override_item("default:chest_locked", override_protected)
-minetest.override_item("default:chest_locked_open", override_protected_open)
+minetest.override_item("hades_chests:chest", override)
+--minetest.override_item("hades_chests:chest_open", override_open)
+minetest.override_item("hades_chests:chest_locked", override_protected)
+--minetest.override_item("hades_chests:chest_locked_open", override_protected_open)
 

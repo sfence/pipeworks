@@ -188,7 +188,7 @@ local function register_wielder(data)
 			paramtype2 = "facedir",
 			tubelike = 1,
 			groups = groups,
-			sounds = default.node_sound_stone_defaults(),
+			sounds = hades_sounds.node_sound_stone_defaults(),
 			drop = data.name_base.."_off",
 			on_construct = function(pos)
 				local meta = minetest.get_meta(pos)
@@ -378,8 +378,8 @@ if pipeworks.enable_node_breaker then
 	minetest.register_craft({
 		output = "pipeworks:nodebreaker_off",
 		recipe = {
-			{ "basic_materials:gear_steel", "basic_materials:gear_steel",   "basic_materials:gear_steel"    },
-			{ "default:stone", "mesecons:piston",   "default:stone" },
+			{ "group:wood", "hades_core:pick_mese",   "group:wood"    },
+			{ "hades_core:stone", "mesecons:piston",   "hades_core:stone" },
 			{ "group:wood",    "mesecons:mesecon",  "group:wood" },
 		}
 	})
@@ -401,7 +401,7 @@ if pipeworks.enable_node_breaker then
 		action = function(pos, node)
 			pipeworks.logger(lbm_id.." entry, nodename="..node.name)
 			local invref = minetest.get_meta(pos):get_inventory()
-			invref:add_item(wield_inv_name, ItemStack("default:pick_mese"))
+			invref:add_item(wield_inv_name, ItemStack("hades_core:pick_mese"))
 		end
 	})
 end
@@ -429,9 +429,9 @@ if pipeworks.enable_deployer then
 	minetest.register_craft({
 		output = "pipeworks:deployer_off",
 		recipe = {
-			{ "group:wood",    "default:chest",    "group:wood"    },
-			{ "default:stone", "mesecons:piston",  "default:stone" },
-			{ "default:stone", "mesecons:mesecon", "default:stone" },
+			{ "group:wood",    "group:chest",    "group:wood"    },
+			{ "hades_core:stone", "mesecons:piston",  "hades_core:stone" },
+			{ "hades_core:stone", "mesecons:mesecon", "hades_core:stone" },
 		}
 	})
 	-- aliases for when someone had technic installed, but then uninstalled it but not pipeworks
@@ -464,9 +464,9 @@ if pipeworks.enable_dispenser then
 	minetest.register_craft({
 		output = "pipeworks:dispenser_off",
 		recipe = {
-			{ "default:desert_sand", "default:chest",    "default:desert_sand" },
-			{ "default:stone",       "mesecons:piston",  "default:stone"       },
-			{ "default:stone",       "mesecons:mesecon", "default:stone"       },
+			{ "hades_core:fertile_sand", "group:chest",    "hades_core:fertile_sand" },
+			{ "hades_core:stone",       "mesecons:piston",  "hades_core:stone"       },
+			{ "hades_core:stone",       "mesecons:mesecon", "hades_core:stone"       },
 		}
 	})
 end

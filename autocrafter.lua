@@ -428,8 +428,8 @@ minetest.register_node("pipeworks:autocrafter", {
 minetest.register_craft( {
 	output = "pipeworks:autocrafter 2",
 	recipe = {
-	        { "default:steel_ingot", "default:mese_crystal", "default:steel_ingot" },
-	        { "basic_materials:plastic_sheet", "default:steel_ingot", "basic_materials:plastic_sheet" },
-	        { "default:steel_ingot", "default:mese_crystal", "default:steel_ingot" }
+	        { "hades_core:steel_ingot", "hades_core:bronze_ingot", "hades_core:steel_ingot" },
+	        { "hades_materials:plastic_sheeting", "hades_core:prismatic_gem", "hades_materials:plastic_sheeting" },
+	        { "hades_core:steel_ingot", "hades_core:bronze_ingot", "hades_core:steel_ingot" }
 	},
 })

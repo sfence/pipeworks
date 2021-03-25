@@ -3,18 +3,37 @@
 
 -- translation support
 local S = minetest.get_translator("pipeworks")
-local DS = minetest.get_translator("default")
+local DS = minetest.get_translator("hades_core")
 
 local fs_helpers = pipeworks.fs_helpers
 
 tube_entry = "^pipeworks_tube_connection_stony.png"
 
+-- for Hades Revisited
+local formspec_info = {
+ ["hades_furnaces:furnace"] = {
+  bg = "gui_furnace_bg.png", bg9middle = "36,36,-34,-34", flame_bg = "default_furnace_fire_bg.png", flame_fg = "default_furnace_fire_fg.png",
+  output_slots = "4.75,1.5;1,1"
+ },
+ ["hades_furnaces:prism_furnace"] = {
+  bg = "gui_prism_furnace_bg.png", bg9middle = "39,36,-36,-37", flame_bg = "hades_furnaces_prism_furnace_fire_bg.png", flame_fg = "hades_furnaces_prism_furnace_fire_fg.png",
+  output_slots = "4.75,0.96;2,2"
+ },
+}
+
+local function get_hotbar_bg(x,y)
+ local out = ""
+ for i=0,7,1 do
+  out = out .."image["..x+i..","..y..";1,1;gui_hb_bg.png]"
+ end
+ return out
+end
+
 local function active_formspec(fuel_percent, item_percent, pos, meta)
+  local ftype = "hades_furnaces:furnace";
 	local formspec =
 		"size[8,8.5]"..
-		default.gui_bg..
-		default.gui_bg_img..
-		default.gui_slots..
+    "background9[30,30;8,8.5;"..formspec_info[ftype].bg..";true;"..formspec_info[ftype].bg9middle.."]"..
 		"list[current_name;src;2.75,0.5;1,1;]"..
 		"list[current_name;fuel;2.75,2.5;1,1;]"..
 		"image[2.75,1.5;1,1;default_furnace_fire_bg.png^[lowpart:"..
@@ -30,7 +49,7 @@ local function active_formspec(fuel_percent, item_percent, pos, meta)
 		"listring[current_player;main]"..
 		"listring[current_name;fuel]"..
 		"listring[current_player;main]"..
-		default.get_hotbar_bg(0, 4.25) ..
+		get_hotbar_bg(0, 4.25) ..
 			fs_helpers.cycling_button(
 				meta,
 				"image_button[0,3.5;1,0.6",
@@ -44,10 +63,9 @@ local function active_formspec(fuel_percent, item_percent, pos, meta)
 end
 
 local function inactive_formspec(pos, meta)
+  local ftype = "hades_furnaces:furnace";
 	local formspec = "size[8,8.5]"..
-	default.gui_bg..
-	default.gui_bg_img..
-	default.gui_slots..
+  "background9[30,30;8,8.5;"..formspec_info[ftype].bg..";true;"..formspec_info[ftype].bg9middle.."]"..
 	"list[current_name;src;2.75,0.5;1,1;]"..
 	"list[current_name;fuel;2.75,2.5;1,1;]"..
 	"image[2.75,1.5;1,1;default_furnace_fire_bg.png]"..
@@ -61,7 +79,7 @@ local function inactive_formspec(pos, meta)
 	"listring[current_player;main]"..
 	"listring[current_name;fuel]"..
 	"listring[current_player;main]"..
-	default.get_hotbar_bg(0, 4.25) ..
+	get_hotbar_bg(0, 4.25) ..
 		fs_helpers.cycling_button(
 			meta,
 			"image_button[0,3.5;1,0.6",
@@ -243,14 +261,14 @@ local function furnace_node_timer(pos, elapsed)
 		local fuel_percent = math.floor(fuel_time / fuel_totaltime * 100)
 		fuel_state = DS("@1%", fuel_percent)
 		formspec = active_formspec(fuel_percent, item_percent, pos, meta)
-		swap_node(pos, "default:furnace_active")
+		swap_node(pos, "hades_furnaces:furnace_active")
 		-- make sure timer restarts automatically
 		result = true
 	else
 		if not fuellist[1]:is_empty() then
 			fuel_state = DS("@1%", "0")
 		end
-		swap_node(pos, "default:furnace")
+		swap_node(pos, "hades_furnaces:furnace")
 		-- stop timer on the inactive furnace
 		minetest.get_node_timer(pos):stop()
 	end
@@ -273,7 +291,7 @@ end
 -- Node definitions
 --
 
-minetest.register_node(":default:furnace", {
+minetest.register_node(":hades_furnaces:furnace", {
 	description = DS("Furnace"),
 	tiles = {
 		"default_furnace_top.png"..tube_entry,
@@ -316,7 +334,7 @@ minetest.register_node(":default:furnace", {
 	paramtype2 = "facedir",
 	legacy_facedir_simple = true,
 	is_ground_content = false,
-	sounds = default.node_sound_stone_defaults(),
+	sounds = hades_sounds.node_sound_stone_defaults(),
 
 	can_dig = can_dig,
 
@@ -343,7 +361,7 @@ minetest.register_node(":default:furnace", {
 		default.get_inventory_drops(pos, "src", drops)
 		default.get_inventory_drops(pos, "fuel", drops)
 		default.get_inventory_drops(pos, "dst", drops)
-		drops[#drops+1] = "default:furnace"
+		drops[#drops+1] = "hades_furnaces:furnace"
 		minetest.remove_node(pos)
 		return drops
 	end,
@@ -362,7 +380,7 @@ minetest.register_node(":default:furnace", {
 	on_rotate = pipeworks.on_rotate
 })
 
-minetest.register_node(":default:furnace_active", {
+minetest.register_node(":hades_furnaces:furnace_active", {
 	description = DS("Furnace"),
 	tiles = {
 		"default_furnace_top.png"..tube_entry,
@@ -413,10 +431,10 @@ minetest.register_node(":default:furnace_active", {
 	},
 	paramtype2 = "facedir",
 	light_source = 8,
-	drop = "default:furnace",
+	drop = "hades_furnaces:furnace",
 	legacy_facedir_simple = true,
 	is_ground_content = false,
-	sounds = default.node_sound_stone_defaults(),
+	sounds = hades_sounds.node_sound_stone_defaults(),
 	on_timer = furnace_node_timer,
 
 	can_dig = can_dig,

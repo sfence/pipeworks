@@ -44,8 +44,8 @@ minetest.register_node("pipeworks:trashcan", {
 minetest.register_craft({
 	output = "pipeworks:trashcan",
 	recipe = {
-		{ "basic_materials:plastic_sheet", "basic_materials:plastic_sheet", "basic_materials:plastic_sheet" },
-		{ "default:steel_ingot", "", "default:steel_ingot" },
-		{ "default:steel_ingot", "default:steel_ingot", "default:steel_ingot" },
+		{ "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting" },
+		{ "hades_core:steel_ingot", "", "hades_core:steel_ingot" },
+		{ "hades_core:steel_ingot", "hades_core:steel_ingot", "hades_core:steel_ingot" },
 	},
 })

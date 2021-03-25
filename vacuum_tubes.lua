@@ -13,16 +13,16 @@ if pipeworks.enable_sand_tube then
 	minetest.register_craft( {
 		output = "pipeworks:sand_tube_1 2",
 		recipe = {
-			{"basic_materials:plastic_sheet", "basic_materials:plastic_sheet", "basic_materials:plastic_sheet"},
-			{"group:sand",                 "group:sand",                 "group:sand"},
-			{"basic_materials:plastic_sheet", "basic_materials:plastic_sheet", "basic_materials:plastic_sheet"}
+			{"hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting"},
+			{"hades_core:fertile_sand",                 "hades_core:fertile_sand",                 "hades_core:fertile_sand"},
+			{"hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting"}
 		},
 	})
 
 	minetest.register_craft( {
 		output = "pipeworks:sand_tube_1",
 		recipe = {
-			{"group:sand", "pipeworks:tube_1", "group:sand"},
+			{"hades_core:fertile_sand", "pipeworks:tube_1", "hades_core:fertile_sand"},
 		},
 	})
 end
@@ -61,26 +61,14 @@ if pipeworks.enable_mese_sand_tube then
 			},
 	})
 
-	minetest.register_craft( {
-		output = "pipeworks:mese_sand_tube_1 2",
-		recipe = {
-			{"basic_materials:plastic_sheet", "basic_materials:plastic_sheet", "basic_materials:plastic_sheet" },
-			{"group:sand",                 "default:mese_crystal",       "group:sand" },
-			{"basic_materials:plastic_sheet", "basic_materials:plastic_sheet", "basic_materials:plastic_sheet" }
-		},
-	})
-
-	minetest.register_craft( {
-		type = "shapeless",
-		output = "pipeworks:mese_sand_tube_1",
-		recipe = {
-			"pipeworks:sand_tube_1",
-			"default:mese_crystal_fragment",
-			"default:mese_crystal_fragment",
-			"default:mese_crystal_fragment",
-			"default:mese_crystal_fragment"
-		},
-	})
+  minetest.register_craft( {
+    output = "pipeworks:mese_sand_tube_1 2",
+    recipe = {
+            { "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting" },
+            { "hades_core:fertile_sand", "hades_core:mese_crystal", "hades_core:fertile_sand" },
+            { "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting", "hades_materials:plastic_sheeting" }
+    },
+  })
 end
 
 local function vacuum(pos, radius)
